@@ -1,6 +1,7 @@
 package tn.esprit.spring.services;
 
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.spring.entities.Course;
 import tn.esprit.spring.entities.Instructor;
@@ -17,6 +18,7 @@ public class InstructorServicesImpl implements IInstructorServices{
 
     private IInstructorRepository instructorRepository;
     private ICourseRepository courseRepository;
+
 
     @Override
     public Instructor addInstructor(Instructor instructor) {
