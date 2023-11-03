@@ -1,0 +1,36 @@
+version: "3.3"
+
+services:
+ 5SAE5-G1-StationSki:
+    container_name: 5SAE5-G1-StationSki
+    build: .5SAE5-G1-StationSki
+    ports:
+      - "8090:8089"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db-mysql:3306/stationSki?createDatabaseIfNotExist=true&useSSL=false&max_allowed_packet=15728640
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=
+    image: "5sae5-g1-stationski"
+    restart: unless-stopped
+    depends_on:
+      - db-mysql
+
+ db-mysql:
+    image: "mysql:latest"
+    container_name: db-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=nour123
+    ports:
+      - "3307:3306"
+    restart: unless-stopped
+
+ sonarqube:
+    image: sonarqube:8.9.7-community
+    ports:
+      - "9000:9000"
+      - "9092:9092"
+
+ nexus:
+    image: sonatype/nexus3
+    ports:
+      - "8081:8081"
