@@ -43,10 +43,10 @@ public class RegistrationRestController {
         return  registrationServices.addRegistrationAndAssignToSkierAndCourse(registration,numSkieur,numCourse);
     }
 
-    @Operation(description = "Numbers of the weeks when an instructor has given lessons in a given support")
+    /*@Operation(description = "Numbers of the weeks when an instructor has given lessons in a given support")
     @GetMapping("/numWeeks/{numInstructor}/{support}")
     public List<Integer> numWeeksCourseOfInstructorBySupport(@PathVariable("numInstructor")Long numInstructor,
                                                                   @PathVariable("support") Support support) {
         return registrationServices.numWeeksCourseOfInstructorBySupport(numInstructor,support);
-    }
+    }*/
 }
