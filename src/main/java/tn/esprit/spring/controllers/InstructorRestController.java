@@ -22,11 +22,7 @@ public class InstructorRestController {
     public Instructor addInstructor(@RequestBody Instructor instructor){
         return  instructorServices.addInstructor(instructor);
     }
-    @Operation(description = "Add Instructor and Assign To Course")
-    @PutMapping("/addAndAssignToCourse/{numCourse}")
-    public Instructor addAndAssignToInstructor(@RequestBody Instructor instructor, @PathVariable("numCourse")Long numCourse){
-        return  instructorServices.addInstructorAndAssignToCourse(instructor,numCourse);
-    }
+
     @Operation(description = "Retrieve all Instructors")
     @GetMapping("/all")
     public List<Instructor> getAllInstructors(){
