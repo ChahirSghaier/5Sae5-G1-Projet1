@@ -98,9 +98,9 @@ public class RegistrationServicesImpl implements  IRegistrationServices{
         return registrationRepository.save(registration);
     }
 
-    /*@Override
+    @Override
     public List<Integer> numWeeksCourseOfInstructorBySupport(Long numInstructor, Support support) {
         return registrationRepository.numWeeksCourseOfInstructorBySupport(numInstructor, support);
-    }*/
+    }
 
 }
