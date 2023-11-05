@@ -10,7 +10,7 @@ services:
       MYSQL_USER: root
       MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: NourDB
+      MYSQL_DATABASE: stationski
     volumes:
       - db_vol:/var/lib/mysqldb
 
