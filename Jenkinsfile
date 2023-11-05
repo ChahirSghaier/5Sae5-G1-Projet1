@@ -9,7 +9,7 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Unit Tests') {
+        stage('Compiling') {
                      steps {
                          sh 'mvn compile'  // Utilisez votre commande de build et de test appropriée ici
                      }
