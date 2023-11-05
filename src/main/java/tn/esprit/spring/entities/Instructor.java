@@ -29,6 +29,7 @@ public class Instructor implements Serializable {
 	String firstName;
 	String lastName;
 	LocalDate dateOfHire;
-
+	@OneToMany
+	Set<Course> courses;
 
 }

@@ -39,7 +39,14 @@ public class InstructorServicesImpl implements IInstructorServices{
     public Instructor retrieveInstructor(Long numInstructor) {
         return instructorRepository.findById(numInstructor).orElse(null);
     }
-
+   /* @Override
+    public Instructor addInstructorAndAssignToCourse(Instructor instructor, Long numCourse) {
+        Course course = courseRepository.findById(numCourse).orElse(null);
+        Set<Course> courseSet = new HashSet<>();
+        courseSet.add(course);
+        instructor.setCourses(courseSet);
+        return instructorRepository.save(instructor);
+    }*/
 
 
 
