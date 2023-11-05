@@ -10,6 +10,11 @@ pipeline {
             }
         }
         stage('Unit Tests') {
+                     steps {
+                         sh 'mvn compile'  // Utilisez votre commande de build et de test appropriée ici
+                     }
+                 }
+        stage('Unit Tests') {
              steps {
                  sh 'mvn clean test'  // Utilisez votre commande de build et de test appropriée ici
              }
