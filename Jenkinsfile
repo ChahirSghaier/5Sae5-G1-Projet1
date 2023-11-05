@@ -16,8 +16,7 @@ pipeline {
          }
          stage('Code Quality Analysis') {
              steps {
-               sh 'mvn clean verify sonar:sonar -Dsonar.login=admin -Dsonar.password=123456ch
-'
+               sh 'mvn clean verify sonar:sonar -Dsonar.login=admin -Dsonar.password=123456ch'
              }
          }
 
