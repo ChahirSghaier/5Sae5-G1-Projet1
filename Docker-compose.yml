@@ -15,7 +15,7 @@ services:
       - db_vol:/var/lib/mysqldb
 
   instructor_app:
-    build: ./
+    build: .
     image: nourbououn-5sae5-g1
     restart: unless-stopped
     ports:
