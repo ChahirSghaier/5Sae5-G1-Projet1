@@ -50,8 +50,8 @@ class CourseServiceTest {
 }
     @Test
     void addCourse() throws IOException
-    {
-        when(courseRepository.save(any(Course.class))).thenReturn(course);
+    {   Course c = course;
+        when(courseRepository.save(any(Course.class))).thenReturn(c);
         Course courseTest = courseServices.addCourse(course);
         assertEquals("le champs numéro du course est valide",1L,courseTest.getNumCourse());
         assertEquals("le champs level est valide",5,courseTest.getLevel());
@@ -62,15 +62,15 @@ class CourseServiceTest {
     }
     @Test
     void testRetrieveCourse() throws IOException
-    {
-        when(courseRepository.findById(1L)).thenReturn(Optional.of(course));
+    {   Course c = course;
+        when(courseRepository.findById(1L)).thenReturn(Optional.of(c));
         Course courseTest = courseServices.retrieveCourse(course.getNumCourse());
         assertTrue("validation du recheche par identifiant ",courseTest.getNumCourse().equals(1L));
         assertEquals("validation ",course,courseTest);
     }
     @Test
     void retrieveAllCourses() throws IOException
-    {
+    {   courseList=new ArrayList<>();
         courseList.add(course);
         courseList.add(new Course(2L,5,TypeCourse.COLLECTIVE_ADULT,Support.SNOWBOARD,800.2f,100));
         when(courseRepository.findAll()).thenReturn(courseList);
