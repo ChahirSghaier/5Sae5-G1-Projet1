@@ -26,12 +26,12 @@ import static org.springframework.test.util.AssertionErrors.*;
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class CourseServiceTest {
-    private Course course;
-    private List<Course> courseList;
+     Course course;
+     List<Course> courseList;
     @InjectMocks
-    private CourseServicesImpl courseServices;
+     CourseServicesImpl courseServices;
     @Mock
-    private ICourseRepository courseRepository;
+     ICourseRepository courseRepository;
     @Before
     public void setUp() throws IOException
 {
