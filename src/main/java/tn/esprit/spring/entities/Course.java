@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.*;
+import javax.validation.constraints.Null;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AccessLevel;
@@ -30,7 +31,6 @@ public class Course implements Serializable {
 	Support support;
 	Float price;
 	int timeSlot;
-
 	@JsonIgnore
 	@OneToMany(mappedBy= "course")
 	Set<Registration> registrations;

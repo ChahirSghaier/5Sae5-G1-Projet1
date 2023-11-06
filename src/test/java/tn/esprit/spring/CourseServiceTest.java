@@ -1,5 +1,6 @@
 package tn.esprit.spring;
 
+import lombok.AllArgsConstructor;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
@@ -12,25 +13,25 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import tn.esprit.spring.entities.Course;
+import tn.esprit.spring.entities.Registration;
 import tn.esprit.spring.entities.Support;
 import tn.esprit.spring.entities.TypeCourse;
 import tn.esprit.spring.repositories.ICourseRepository;
 import tn.esprit.spring.services.CourseServicesImpl;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
-
+@AllArgsConstructor
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 class CourseServiceTest {
     private Course course;
+    private Set<Registration> registrationSet;
     private List<Course> courseList;
     @InjectMocks
     private CourseServicesImpl courseServices;
@@ -41,17 +42,23 @@ class CourseServiceTest {
 {
       course = new Course(1L, 5, TypeCourse.INDIVIDUAL, Support.SKI, 500.2f, 30);
       courseList = new ArrayList<>();
+    registrationSet = new HashSet<>();
+
+
 }
     @After
     public void tearDown() throws IOException
 {
     course = null;
     courseList = null;
+    registrationSet = new HashSet<>();
 }
     @Test
     void addCourse() throws IOException
-    {   Course c = course;
-        when(courseRepository.save(any(Course.class))).thenReturn(c);
+    {   registrationSet.add(new Registration());
+        registrationSet.add(new Registration());
+        course.getRegistrations().addAll(registrationSet);
+        when(courseRepository.save(any(Course.class))).thenReturn(course);
         Course courseTest = courseServices.addCourse(course);
         assertEquals("le champs numéro du course est valide",1L,courseTest.getNumCourse());
         assertEquals("le champs level est valide",5,courseTest.getLevel());
@@ -62,15 +69,17 @@ class CourseServiceTest {
     }
     @Test
     void testRetrieveCourse() throws IOException
-    {   Course c = course;
-        when(courseRepository.findById(1L)).thenReturn(Optional.of(c));
+    {   registrationSet.add(new Registration());
+        registrationSet.add(new Registration());
+        course.getRegistrations().addAll(registrationSet);
+        when(courseRepository.findById(1L)).thenReturn(Optional.of(course));
         Course courseTest = courseServices.retrieveCourse(course.getNumCourse());
         assertTrue("validation du recheche par identifiant ",courseTest.getNumCourse().equals(1L));
         assertEquals("validation ",course,courseTest);
     }
     @Test
     void retrieveAllCourses() throws IOException
-    {   courseList=new ArrayList<>();
+    {
         courseList.add(course);
         courseList.add(new Course(2L,5,TypeCourse.COLLECTIVE_ADULT,Support.SNOWBOARD,800.2f,100));
         when(courseRepository.findAll()).thenReturn(courseList);
