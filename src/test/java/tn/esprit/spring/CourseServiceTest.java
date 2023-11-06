@@ -60,6 +60,7 @@ class CourseServiceTest {
         course.getRegistrations().addAll(registrationSet);
         when(courseRepository.save(any(Course.class))).thenReturn(course);
         Course courseTest = courseServices.addCourse(course);
+        Mockito.verify(courseRepository).save(courseTest);
         assertEquals("le champs numéro du course est valide",1L,courseTest.getNumCourse());
         assertEquals("le champs level est valide",5,courseTest.getLevel());
         assertEquals("le champs price est valide",500.2f,courseTest.getPrice());
@@ -74,6 +75,7 @@ class CourseServiceTest {
         course.getRegistrations().addAll(registrationSet);
         when(courseRepository.findById(1L)).thenReturn(Optional.of(course));
         Course courseTest = courseServices.retrieveCourse(course.getNumCourse());
+        Mockito.verify(courseRepository).findById(1L);
         assertTrue("validation du recheche par identifiant ",courseTest.getNumCourse().equals(1L));
         assertEquals("validation ",course,courseTest);
     }
@@ -84,6 +86,7 @@ class CourseServiceTest {
         courseList.add(new Course(2L,5,TypeCourse.COLLECTIVE_ADULT,Support.SNOWBOARD,800.2f,100));
         when(courseRepository.findAll()).thenReturn(courseList);
         List<Course> courseList1 =  courseServices.retrieveAllCourses();
+        Mockito.verify(courseRepository).findAll();
         assertEquals("Validation of retrieve all courses ",courseList,courseList1);
     }
 
