@@ -3,11 +3,14 @@ package tn.esprit.spring;
 import lombok.AllArgsConstructor;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import tn.esprit.spring.entities.Course;
@@ -28,14 +31,16 @@ import static org.springframework.test.util.AssertionErrors.*;
 public class CourseServiceTest {
      Course course;
      List<Course> courseList;
-    @InjectMocks
+     @InjectMocks
      CourseServicesImpl courseServices;
-    @Mock
+     @Mock
      ICourseRepository courseRepository;
+
     @Before
     public void setUp() throws IOException
 {
-      course = new Course(1L, 5, TypeCourse.INDIVIDUAL, Support.SKI, 500.2f, 30,new HashSet<>());
+    MockitoAnnotations.openMocks(this);
+    course = new Course(1L, 5, TypeCourse.INDIVIDUAL, Support.SKI, 500.2f, 30,new HashSet<>());
       courseList = new ArrayList<Course>(){
           {
               add(new Course(1L,5,TypeCourse.COLLECTIVE_ADULT,Support.SNOWBOARD,50.2f,30,new HashSet<>()));
