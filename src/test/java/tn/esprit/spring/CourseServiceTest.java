@@ -35,11 +35,11 @@ public class CourseServiceTest {
     @Before
     public void setUp() throws IOException
 {
-      course = new Course(1L, 5, TypeCourse.INDIVIDUAL, Support.SKI, 500.2f, 30);
+      course = new Course(1L, 5, TypeCourse.INDIVIDUAL, Support.SKI, 500.2f, 30,new HashSet<>());
       courseList = new ArrayList<Course>(){
           {
-              add(new Course(1L,5,TypeCourse.COLLECTIVE_ADULT,Support.SNOWBOARD,50.2f,30));
-              add(new Course(2L,10,TypeCourse.COLLECTIVE_ADULT,Support.SNOWBOARD,100.2f,60));
+              add(new Course(1L,5,TypeCourse.COLLECTIVE_ADULT,Support.SNOWBOARD,50.2f,30,new HashSet<>()));
+              add(new Course(2L,10,TypeCourse.COLLECTIVE_ADULT,Support.SNOWBOARD,100.2f,60,new HashSet<>()));
           }  };
 
 }
