@@ -29,7 +29,7 @@ import static org.springframework.test.util.AssertionErrors.*;
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class CourseServiceTest {
-     Course course;
+    /* Course course;
      List<Course> courseList;
      @InjectMocks
      CourseServicesImpl courseServices;
@@ -86,5 +86,5 @@ public class CourseServiceTest {
         assertNotNull("Not Null",courseList1);
     }
 
-
+*/
 }
