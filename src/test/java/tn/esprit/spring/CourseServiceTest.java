@@ -21,8 +21,8 @@ import java.util.*;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.util.AssertionErrors.assertEquals;
-import static org.springframework.test.util.AssertionErrors.assertTrue;
+import static org.springframework.test.util.AssertionErrors.*;
+
 @AllArgsConstructor
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
@@ -68,8 +68,9 @@ public class CourseServiceTest {
     @Test
     void testRetrieveCourse() throws IOException
     {
-        Mockito.when(courseRepository.findById(1L)).thenReturn(Optional.of(course));
-        Course courseTest = courseServices.retrieveCourse(course.getNumCourse());
+        Mockito.when(courseRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(course));
+        Course courseTest = courseServices.retrieveCourse(1L);
+        assertNotNull("Not Null",courseTest);
         assertTrue("validation du recheche par identifiant ",courseTest.getNumCourse().equals(1L));
         assertEquals("validation ",course,courseTest);
     }
@@ -80,6 +81,7 @@ public class CourseServiceTest {
         List<Course> courseList1 =  courseServices.retrieveAllCourses();
         Mockito.verify(courseRepository).findAll();
         assertEquals("Validation of retrieve all courses ",courseList,courseList1);
+        assertNotNull("Not Null",courseList1);
     }
 
 
