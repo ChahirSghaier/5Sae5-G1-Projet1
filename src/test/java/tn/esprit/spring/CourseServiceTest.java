@@ -38,11 +38,9 @@ public class CourseServiceTest {
       course = new Course(1L, 5, TypeCourse.INDIVIDUAL, Support.SKI, 500.2f, 30);
       courseList = new ArrayList<Course>(){
           {
-              add(course);
+              add(new Course(1L,5,TypeCourse.COLLECTIVE_ADULT,Support.SNOWBOARD,50.2f,30));
               add(new Course(2L,10,TypeCourse.COLLECTIVE_ADULT,Support.SNOWBOARD,100.2f,60));
-          }
-      };
-
+          }  };
 
 }
     @After
