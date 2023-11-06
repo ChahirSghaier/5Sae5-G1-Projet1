@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
 import static org.springframework.test.util.AssertionErrors.assertTrue;
@@ -50,7 +51,7 @@ class CourseServiceTest {
     @Test
     void addCourse() throws IOException
     {
-        when(courseRepository.save(course)).thenReturn(course);
+        when(courseRepository.save(any(Course.class))).thenReturn(course);
         Course courseTest = courseServices.addCourse(course);
         assertEquals("le champs numéro du course est valide",1L,courseTest.getNumCourse());
         assertEquals("le champs level est valide",5,courseTest.getLevel());
@@ -65,6 +66,7 @@ class CourseServiceTest {
         when(courseRepository.findById(1L).get()).thenReturn(course);
         Course courseTest = courseServices.retrieveCourse(course.getNumCourse());
         assertTrue("validation du recheche par identifiant ",courseTest.getNumCourse().equals(1L));
+        assertEquals("validation ",course,courseTest);
     }
     @Test
     void retrieveAllCourses() throws IOException
