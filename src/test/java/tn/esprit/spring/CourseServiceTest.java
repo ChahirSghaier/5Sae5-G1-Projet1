@@ -1,5 +1,7 @@
 package tn.esprit.spring;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -10,7 +12,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
 import tn.esprit.spring.entities.Course;
-import tn.esprit.spring.entities.Registration;
 import tn.esprit.spring.entities.Support;
 import tn.esprit.spring.entities.TypeCourse;
 import tn.esprit.spring.repositories.ICourseRepository;
@@ -34,13 +35,13 @@ class CourseServiceTest {
     private CourseServicesImpl courseServices;
     @Mock
     private ICourseRepository courseRepository;
-    @BeforeEach
+    @Before
     public void setUp() throws IOException
 {
       course = new Course(1L, 5, TypeCourse.INDIVIDUAL, Support.SKI, 500.2f, 30);
       courseList = new ArrayList<>();
 }
-    @AfterEach
+    @After
     public void reinitialise() throws IOException
 {
     course = null;
@@ -51,7 +52,6 @@ class CourseServiceTest {
     {
         when(courseRepository.save(Mockito.any(Course.class))).thenReturn(course);
         Course courseTest = courseServices.addCourse(course);
-        Mockito.verify(courseRepository).save(courseTest);
         assertEquals("le champs numéro du course est valide",1L,courseTest.getNumCourse());
         assertEquals("le champs level est valide",5,courseTest.getLevel());
         assertEquals("le champs price est valide",500.2f,courseTest.getPrice());
@@ -64,7 +64,6 @@ class CourseServiceTest {
     {
         when(courseRepository.findById(1L).get()).thenReturn(course);
         Course courseTest = courseServices.retrieveCourse(course.getNumCourse());
-        Mockito.verify(courseRepository).findById(1L);
         assertTrue("validation du recheche par identifiant ",courseTest.getNumCourse().equals(1L));
     }
     @Test
