@@ -50,7 +50,7 @@ class CourseServiceTest {
     @Test
     void addCourse() throws IOException
     {
-        when(courseRepository.save(Mockito.any(Course.class))).thenReturn(course);
+        when(courseRepository.save(course)).thenReturn(course);
         Course courseTest = courseServices.addCourse(course);
         assertEquals("le champs numéro du course est valide",1L,courseTest.getNumCourse());
         assertEquals("le champs level est valide",5,courseTest.getLevel());
