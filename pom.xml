@@ -19,6 +19,7 @@
 		<sonar.host.url>http://192.168.2.13:9000</sonar.host.url>
 		<sonar.login>admin</sonar.login>
 		<sonar.password>123456ch</sonar.password>
+		<sonar.ws.timeout>60000</sonar.ws.timeout> <!-- Augmentez le délai d'attente en millisecondes -->
 	</properties>
 
 	<dependencies>
