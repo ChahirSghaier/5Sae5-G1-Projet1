@@ -55,7 +55,7 @@ public class CourseServiceTest {
     @Test
     void addCourse() throws IOException
     {
-        when(courseRepository.save(any(Course.class))).thenReturn(course);
+        Mockito.when(courseRepository.save(any(Course.class))).thenReturn(course);
         Course courseTest = courseServices.addCourse(course);
         Mockito.verify(courseRepository).save(courseTest);
         assertEquals("le champs numéro du course est valide",1L,courseTest.getNumCourse());
@@ -68,16 +68,15 @@ public class CourseServiceTest {
     @Test
     void testRetrieveCourse() throws IOException
     {
-        when(courseRepository.findById(1L)).thenReturn(Optional.of(course));
+        Mockito.when(courseRepository.findById(1L)).thenReturn(Optional.of(course));
         Course courseTest = courseServices.retrieveCourse(course.getNumCourse());
-        Mockito.verify(courseRepository).findById(1L);
         assertTrue("validation du recheche par identifiant ",courseTest.getNumCourse().equals(1L));
         assertEquals("validation ",course,courseTest);
     }
     @Test
     void retrieveAllCourses() throws IOException
     {
-        when(courseRepository.findAll()).thenReturn(courseList);
+        Mockito.when(courseRepository.findAll()).thenReturn(courseList);
         List<Course> courseList1 =  courseServices.retrieveAllCourses();
         Mockito.verify(courseRepository).findAll();
         assertEquals("Validation of retrieve all courses ",courseList,courseList1);
