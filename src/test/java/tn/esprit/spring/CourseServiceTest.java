@@ -22,6 +22,7 @@ import tn.esprit.spring.services.CourseServicesImpl;
 import java.io.IOException;
 import java.util.*;
 
+import static com.sun.java.accessibility.util.GUIInitializedMulticaster.add;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.springframework.test.util.AssertionErrors.assertEquals;
@@ -31,7 +32,6 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
 @ExtendWith(MockitoExtension.class)
 class CourseServiceTest {
     private Course course;
-    private Set<Registration> registrationSet;
     private List<Course> courseList;
     @InjectMocks
     private CourseServicesImpl courseServices;
@@ -41,8 +41,12 @@ class CourseServiceTest {
     public void setUp() throws IOException
 {
       course = new Course(1L, 5, TypeCourse.INDIVIDUAL, Support.SKI, 500.2f, 30);
-      courseList = new ArrayList<>();
-      registrationSet = new HashSet<>();
+      courseList = new ArrayList<Course>(){
+          {
+              add(course);
+              add(new Course(2L,10,TypeCourse.COLLECTIVE_ADULT,Support.SNOWBOARD,100.2f,60));
+          }
+      };
 
 
 }
@@ -51,13 +55,10 @@ class CourseServiceTest {
 {
     course = null;
     courseList = null;
-    registrationSet = null;
 }
     @Test
     void addCourse() throws IOException
-    {   registrationSet.add(new Registration());
-        registrationSet.add(new Registration());
-        course.getRegistrations().addAll(registrationSet);
+    {
         when(courseRepository.save(any(Course.class))).thenReturn(course);
         Course courseTest = courseServices.addCourse(course);
         Mockito.verify(courseRepository).save(courseTest);
@@ -70,9 +71,7 @@ class CourseServiceTest {
     }
     @Test
     void testRetrieveCourse() throws IOException
-    {   registrationSet.add(new Registration());
-        registrationSet.add(new Registration());
-        course.getRegistrations().addAll(registrationSet);
+    {
         when(courseRepository.findById(1L)).thenReturn(Optional.of(course));
         Course courseTest = courseServices.retrieveCourse(course.getNumCourse());
         Mockito.verify(courseRepository).findById(1L);
