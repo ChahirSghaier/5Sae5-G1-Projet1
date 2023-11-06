@@ -20,7 +20,7 @@ import tn.esprit.spring.services.CourseServicesImpl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -43,7 +43,7 @@ class CourseServiceTest {
       courseList = new ArrayList<>();
 }
     @After
-    public void reinitialise() throws IOException
+    public void tearDown() throws IOException
 {
     course = null;
     courseList = null;
@@ -63,7 +63,7 @@ class CourseServiceTest {
     @Test
     void testRetrieveCourse() throws IOException
     {
-        when(courseRepository.findById(1L).get()).thenReturn(course);
+        when(courseRepository.findById(1L)).thenReturn(Optional.of(course));
         Course courseTest = courseServices.retrieveCourse(course.getNumCourse());
         assertTrue("validation du recheche par identifiant ",courseTest.getNumCourse().equals(1L));
         assertEquals("validation ",course,courseTest);
