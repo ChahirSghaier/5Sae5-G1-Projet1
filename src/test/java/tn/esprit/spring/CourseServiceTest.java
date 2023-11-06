@@ -42,7 +42,7 @@ class CourseServiceTest {
 {
       course = new Course(1L, 5, TypeCourse.INDIVIDUAL, Support.SKI, 500.2f, 30);
       courseList = new ArrayList<>();
-    registrationSet = new HashSet<>();
+      registrationSet = new HashSet<>();
 
 
 }
@@ -51,7 +51,7 @@ class CourseServiceTest {
 {
     course = null;
     courseList = null;
-    registrationSet = new HashSet<>();
+    registrationSet = null;
 }
     @Test
     void addCourse() throws IOException
