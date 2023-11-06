@@ -30,7 +30,7 @@ import static org.springframework.test.util.AssertionErrors.assertTrue;
 @AllArgsConstructor
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
-class CourseServiceTest {
+public class CourseServiceTest {
     private Course course;
     private List<Course> courseList;
     @InjectMocks
@@ -81,8 +81,6 @@ class CourseServiceTest {
     @Test
     void retrieveAllCourses() throws IOException
     {
-        courseList.add(course);
-        courseList.add(new Course(2L,5,TypeCourse.COLLECTIVE_ADULT,Support.SNOWBOARD,800.2f,100));
         when(courseRepository.findAll()).thenReturn(courseList);
         List<Course> courseList1 =  courseServices.retrieveAllCourses();
         Mockito.verify(courseRepository).findAll();
