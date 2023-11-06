@@ -19,7 +19,7 @@
 		<sonar.host.url>http://192.168.2.13:9000</sonar.host.url>
 		<sonar.login>admin</sonar.login>
 		<sonar.password>123456ch</sonar.password>
-		<sonar.ws.timeout>60000</sonar.ws.timeout> <!-- Augmentez le délai d'attente en millisecondes -->
+		<sonar.ws.timeout>60000</sonar.ws.timeout> <!--  le délai d'attente en millisecondes -->
 	</properties>
 
 	<dependencies>
@@ -58,7 +58,18 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- Mockito -->
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
