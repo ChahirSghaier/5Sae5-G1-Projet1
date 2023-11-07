@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -31,7 +29,6 @@ import static org.springframework.test.util.AssertionErrors.*;
 @ExtendWith(MockitoExtension.class)
 @RequiredArgsConstructor
 public class CourseServiceTest {
-     private Course course;
      private List<Course> courseList;
      @InjectMocks
      CourseServicesImpl courseServices;
@@ -42,19 +39,17 @@ public class CourseServiceTest {
     public void setUp() throws IOException
 {
     MockitoAnnotations.openMocks(this);
-    course = new Course();
-      courseList = new ArrayList<Course>();
-
+      courseList = new ArrayList<>();
 }
     @After
     public void tearDown() throws IOException
 {
-    course = null;
     courseList = null;
 }
     @Test
     void addCourse() throws IOException
-    {   course.setNumCourse(1L);
+    {   Course course = new Course();
+        course.setNumCourse(1L);
         course.setTypeCourse(TypeCourse.INDIVIDUAL);
         course.setLevel(5);
         course.setSupport(Support.SKI);
@@ -71,7 +66,8 @@ public class CourseServiceTest {
     }
     @Test
     void testRetrieveCourse() throws IOException
-    {   course.setNumCourse(1L);
+    {   Course course = new Course();
+        course.setNumCourse(1L);
         course.setTypeCourse(TypeCourse.INDIVIDUAL);
         course.setLevel(5);
         course.setSupport(Support.SKI);
@@ -84,7 +80,8 @@ public class CourseServiceTest {
     }
     @Test
     void retrieveAllCourses() throws IOException
-    {   course.setNumCourse(2L);
+    {   Course course = new Course();
+        course.setNumCourse(2L);
         course.setTypeCourse(TypeCourse.INDIVIDUAL);
         course.setLevel(8);
         course.setSupport(Support.SNOWBOARD);
