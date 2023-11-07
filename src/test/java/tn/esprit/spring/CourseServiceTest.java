@@ -22,13 +22,13 @@ import java.io.IOException;
 import java.util.*;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.MockitoAnnotations.initMocks;
 import static org.springframework.test.util.AssertionErrors.*;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 @RequiredArgsConstructor
 public class CourseServiceTest {
-     private List<Course> courseList;
      @InjectMocks
      CourseServicesImpl courseServices;
      @Mock
@@ -38,12 +38,11 @@ public class CourseServiceTest {
     public void setUp() throws IOException
 {
      MockitoAnnotations.openMocks(this);
-      courseList = new ArrayList<>();
 }
     @After
     public void tearDown() throws IOException
 {
-    courseList = null;
+    initMocks(this);
 }
     @Test
     void addCourse() throws IOException
@@ -53,15 +52,17 @@ public class CourseServiceTest {
         course.setLevel(5);
         course.setSupport(Support.SKI);
         course.setPrice(500.7f);
+        course.setTimeSlot(30);
         Mockito.when(courseRepository.save(any(Course.class))).thenReturn(course);
         Course courseTest = courseServices.addCourse(course);
         Mockito.verify(courseRepository).save(courseTest);
         assertEquals("le champs numéro du course est valide",1L,courseTest.getNumCourse());
         assertEquals("le champs level est valide",5,courseTest.getLevel());
-        assertEquals("le champs price est valide",500.2f,courseTest.getPrice());
+        assertEquals("le champs price est valide",500.7f,courseTest.getPrice());
         assertEquals("le champs timeSlot est valide",30,courseTest.getTimeSlot());
         assertEquals("le champs support est valide",Support.SKI,courseTest.getSupport());
         assertEquals("le champs typeCourse est valide",TypeCourse.INDIVIDUAL,courseTest.getTypeCourse());
+        assertTrue(" validation d egalitee ",course == courseTest);
     }
     @Test
     void testRetrieveCourse() throws IOException
@@ -74,12 +75,14 @@ public class CourseServiceTest {
         Mockito.when(courseRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(course));
         Course courseTest = courseServices.retrieveCourse(1L);
         assertNotNull("Not Null",courseTest);
-        assertTrue("validation du recheche par identifiant ",courseTest.getNumCourse().equals(1L));
+        assertTrue("validation du recheche par identifiant ",course.getNumCourse().equals(1L));
         assertEquals("validation ",course,courseTest);
     }
     @Test
     void retrieveAllCourses() throws IOException
-    {   Course course = new Course();
+    {
+        List<Course> courseList=new ArrayList<>();
+        Course course = new Course();
         course.setNumCourse(2L);
         course.setTypeCourse(TypeCourse.INDIVIDUAL);
         course.setLevel(8);
