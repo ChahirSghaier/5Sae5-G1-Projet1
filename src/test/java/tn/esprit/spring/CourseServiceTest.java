@@ -1,6 +1,7 @@
 package tn.esprit.spring;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.jupiter.api.AfterEach;
@@ -28,9 +29,10 @@ import static org.springframework.test.util.AssertionErrors.*;
 @AllArgsConstructor
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
+@RequiredArgsConstructor
 public class CourseServiceTest {
-     Course course;
-     List<Course> courseList;
+     private Course course;
+     private List<Course> courseList;
      @InjectMocks
      CourseServicesImpl courseServices;
      @Mock
