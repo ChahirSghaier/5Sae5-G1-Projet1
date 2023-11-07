@@ -29,7 +29,7 @@ import static org.springframework.test.util.AssertionErrors.*;
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 public class CourseServiceTest {
-    /* Course course;
+     Course course;
      List<Course> courseList;
      @InjectMocks
      CourseServicesImpl courseServices;
@@ -40,12 +40,8 @@ public class CourseServiceTest {
     public void setUp() throws IOException
 {
     MockitoAnnotations.openMocks(this);
-    course = new Course(1L, 5, TypeCourse.INDIVIDUAL, Support.SKI, 500.2f, 30,new HashSet<>());
-      courseList = new ArrayList<Course>(){
-          {
-              add(new Course(1L,5,TypeCourse.COLLECTIVE_ADULT,Support.SNOWBOARD,50.2f,30,new HashSet<>()));
-              add(new Course(2L,10,TypeCourse.COLLECTIVE_ADULT,Support.SNOWBOARD,100.2f,60,new HashSet<>()));
-          }  };
+    course = new Course();
+      courseList = new ArrayList<Course>();
 
 }
     @After
@@ -56,7 +52,11 @@ public class CourseServiceTest {
 }
     @Test
     void addCourse() throws IOException
-    {
+    {   course.setNumCourse(1L);
+        course.setTypeCourse(TypeCourse.INDIVIDUAL);
+        course.setLevel(5);
+        course.setSupport(Support.SKI);
+        course.setPrice(500.7f);
         Mockito.when(courseRepository.save(any(Course.class))).thenReturn(course);
         Course courseTest = courseServices.addCourse(course);
         Mockito.verify(courseRepository).save(courseTest);
@@ -69,7 +69,11 @@ public class CourseServiceTest {
     }
     @Test
     void testRetrieveCourse() throws IOException
-    {
+    {   course.setNumCourse(1L);
+        course.setTypeCourse(TypeCourse.INDIVIDUAL);
+        course.setLevel(5);
+        course.setSupport(Support.SKI);
+        course.setPrice(500.7f);
         Mockito.when(courseRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(course));
         Course courseTest = courseServices.retrieveCourse(1L);
         assertNotNull("Not Null",courseTest);
@@ -78,7 +82,12 @@ public class CourseServiceTest {
     }
     @Test
     void retrieveAllCourses() throws IOException
-    {
+    {   course.setNumCourse(2L);
+        course.setTypeCourse(TypeCourse.INDIVIDUAL);
+        course.setLevel(8);
+        course.setSupport(Support.SNOWBOARD);
+        course.setPrice(400.2f);
+        courseList.add(course);
         Mockito.when(courseRepository.findAll()).thenReturn(courseList);
         List<Course> courseList1 =  courseServices.retrieveAllCourses();
         Mockito.verify(courseRepository).findAll();
@@ -86,5 +95,5 @@ public class CourseServiceTest {
         assertNotNull("Not Null",courseList1);
     }
 
-*/
+
 }
