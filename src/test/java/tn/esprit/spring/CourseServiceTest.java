@@ -24,7 +24,6 @@ import java.util.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.springframework.test.util.AssertionErrors.*;
 
-@AllArgsConstructor
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
 @RequiredArgsConstructor
@@ -38,7 +37,7 @@ public class CourseServiceTest {
     @Before
     public void setUp() throws IOException
 {
-    MockitoAnnotations.openMocks(this);
+     MockitoAnnotations.openMocks(this);
       courseList = new ArrayList<>();
 }
     @After
