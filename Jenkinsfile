@@ -36,7 +36,19 @@ pipeline {
            sh 'docker build -t sghaierchahir-5sea5-g1-station-ski:1.0.0 -f dockerfile .'
            }
            }
-
+    stage('Pushing image to Docker Hub '){
+          steps
+         {
+          sh 'docker push chahirsghaier/sghaierchahir-5sea5-g1-station-ski:1.0.0'
+         }
+         }
+    }
+    stage('Executing Docker Compose'){
+    steps
+    {
+        sh 'docker compose up -d'
+         }
 
     }
+
 }
