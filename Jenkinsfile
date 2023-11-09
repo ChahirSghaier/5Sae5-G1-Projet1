@@ -4,10 +4,11 @@ pipeline {
     stages {
      stage('Récupération du code source')
             {
-                steps
-                {
-                    checkout scm
-                }
+                    steps {
+                               script {
+                                   git branch: 'master' , url: 'https://github.com/ChahirSghaier/5Sae5-G1-Projet1.git'
+                               }
+                           }
             }
              stage('Nettoyage du dépendance ') {
                                  steps {
