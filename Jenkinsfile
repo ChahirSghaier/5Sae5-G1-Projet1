@@ -34,7 +34,7 @@ pipeline {
            }
         stage('Docker Login') {
     steps {
-            sh 'docker login -u chahirsghaier --password-stdin < dckr_pat_sL-htD0wfEVn04zOkdTLt6hDv6A'
+            sh 'docker login -u chahirsghaier --password-stdin  dckr_pat_sL-htD0wfEVn04zOkdTLt6hDv6A'
         }
     }
 
