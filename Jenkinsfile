@@ -32,9 +32,10 @@ pipeline {
                sh 'docker build -t chahirsghaier/sghaierchahir-5sea5-g1-station-ski:1.0.0 -f dockerfile .'
                }
                }
-            stage('Docker Login') {
+            stage('Docker Login')
+            {
         steps {
-                sh 'docker login -u chahirsghaier --password-stdin  dckr_pat_sL-htD0wfEVn04zOkdTLt6hDv6A'
+                sh 'docker login -u chahirsghaier --password  99332516ch'
             }
         }
 
@@ -50,7 +51,7 @@ pipeline {
         steps
             {
             sh 'docker compose up -d'
-             }
+          }
         }
             stage('Deploying using Nexus ')
              {
