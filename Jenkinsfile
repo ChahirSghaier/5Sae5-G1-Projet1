@@ -9,11 +9,12 @@ pipeline {
                 checkout scm
             }
         }
-    stage('Compiling') {
-                     steps {
-                         sh 'mvn compile'  // Utilisez votre commande de build et de test appropriée ici
-                     }
-                 }
+         stage('Nettoyage du dépendance ') {
+                             steps {
+                                 sh 'mvn clean install'
+                                    }
+                         }
+
     stage('Unit Tests') {
              steps {
                  sh 'mvn clean test'  // Utilisez votre commande de build et de test appropriée ici
@@ -23,12 +24,6 @@ pipeline {
          steps {
                sh 'mvn clean verify sonar:sonar -Dsonar.login=admin -Dsonar.password=123456ch'
              }
-         }
-    stage('Deploying using Nexus ')
-         {
-         steps{
-           sh 'mvn deploy'
-         }
          }
 
     stage('Building image')
@@ -51,6 +46,13 @@ pipeline {
         sh 'docker compose up -d'
          }
     }
+        stage('Deploying using Nexus ')
+         {
+         steps{
+           sh 'mvn deploy'
+         }
+         }
+
 
 }
 }
