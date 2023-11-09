@@ -32,6 +32,13 @@ pipeline {
            sh 'docker build -t chahirsghaier/sghaierchahir-5sea5-g1-station-ski:1.0.0 -f dockerfile .'
            }
            }
+        stage('Docker Login') {
+    steps {
+        withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_HUB_USERNAME', passwordVariable: 'DOCKER_HUB_PASSWORD')]) {
+            sh "docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD"
+        }
+    }
+}
     stage('Pushing image to Docker Hub ')
     {
           steps
