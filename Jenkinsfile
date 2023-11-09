@@ -12,7 +12,7 @@ pipeline {
              stage('Nettoyage du dépendance ') {
                                  steps {
                                      sh 'mvn clean install'
-                                        }
+                             }
                              }
 
         stage('Unit Tests') {
