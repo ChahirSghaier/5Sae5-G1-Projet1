@@ -29,7 +29,7 @@ pipeline {
     stage('Building image')
     {
            steps{
-           sh 'docker build -t sghaierchahir-5sea5-g1-station-ski:1.0.0 -f dockerfile .'
+           sh 'docker build -t chahirsghaier/sghaierchahir-5sea5-g1-station-ski:1.0.0 -f dockerfile .'
            }
            }
     stage('Pushing image to Docker Hub ')
