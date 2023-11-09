@@ -1,0 +1,24 @@
+version: '3'
+services:
+  ski_app:
+    image: chahirsghaier/sghaierchahir-5sea5-g1-station-ski:1.0.0
+    ports:
+      - "8089:8089"
+    restart: on-failure
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/stationSki?createDatabaseIfNotExist=true&useUnicode=true
+    depends_on:
+      - mysql
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD:
+      MYSQL_DATABASE: stationSki
+  nexus:
+    image: sonatype/nexus3
+    container_name: nexus
+    ports:
+      - "8081:8081"
+
+
+
